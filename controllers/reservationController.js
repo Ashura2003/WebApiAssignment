@@ -1,6 +1,5 @@
 const Reservation = require("../models/reservationModel");
 
-
 const createReservation = async (req, res) => {
   const { userId, eventDate, numberOfGuest } = req.body;
 
@@ -13,7 +12,7 @@ const createReservation = async (req, res) => {
 
   try {
     const currentDate = Date();
-    if ((numberOfGuest < 0) & (eventDate < currentDate)) {
+    if (numberOfGuest < 0 && eventDate < currentDate) {
       return res.json({
         sucess: false,
         message: "Please enter the correct criteria",
@@ -43,4 +42,4 @@ const createReservation = async (req, res) => {
   }
 };
 
-module.exports ={ createReservation};
+module.exports = { createReservation };
