@@ -3,15 +3,14 @@ const app = express();
 const dotenv = require("dotenv");
 const connectDatabase = require("./database/database");
 
-app.use("/api/", require("./routes/userRoutes"));
-
 
 dotenv.config();
 
 connectDatabase();
+app.use(express.json());
 
 const PORT = process.env.PORT;
-app.use(express.json());
+app.use("/api/", require("./routes/userRoutes"));
 
 app.use("/api/", require("./routes/reservationRoute"));
 app.use("/api/", require("./routes/bookAppointmentRoute"));
