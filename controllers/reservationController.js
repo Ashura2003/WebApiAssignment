@@ -11,11 +11,20 @@ const createReservation = async (req, res) => {
   }
 
   try {
-    const currentDate = Date();
-    if (numberOfGuest < 0 && eventDate < currentDate) {
+    const currentDate = new Date();
+    const targetDate = new Date(eventDate);
+
+    if (numberOfGuest < 0) {
       return res.json({
         sucess: false,
-        message: "Please enter the correct criteria",
+        message: "Number of Guest is negative",
+      });
+    }
+
+    if (targetDate < currentDate) {
+      return res.json({
+        sucess: false,
+        message: "Enter valid date",
       });
     }
 

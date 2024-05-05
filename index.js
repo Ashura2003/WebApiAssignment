@@ -10,10 +10,9 @@ connectDatabase();
 app.use(express.json());
 
 const PORT = process.env.PORT;
-app.use("/api/", require("./routes/userRoutes"));
-
-app.use("/api/", require("./routes/reservationRoute"));
-app.use("/api/", require("./routes/bookAppointmentRoute"));
+app.use("/api", require("./routes/userRoutes"));
+app.use("/api", require("./routes/reservationRoute"));
+app.use("/api", require("./routes/bookAppointmentRoute"));
 
 app.listen(PORT, () => {
   console.log(`The server is successfully running on  ${PORT}`);

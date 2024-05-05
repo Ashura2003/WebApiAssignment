@@ -12,7 +12,7 @@ const createUser = async (req, res) => {
     });
   }
   try {
-    const existingUser = await userModel.findOne({ email: email });
+    const existingUser = await userModel.findOne({ phoneNumber: phoneNumber });
 
     if (existingUser) {
       return res.json({

@@ -15,10 +15,17 @@ const bookAppointment = async (req, res) => {
     const timeFormat = /^([01]\d|2[0-3]):([0-5]\d)$/;
     const currentDate = new Date();
 
-    if (!dateFormat.test(date) && new Date(date) < currentDate) {
+    if (!dateFormat.test(date)) {
       return res.json({
         success: false,
         message: "Please enter valid date format",
+      });
+    }
+
+    if (new Date(date) < currentDate) {
+      return res.json({
+        success: false,
+        message: "Previous Date Entered",
       });
     }
 
@@ -36,10 +43,13 @@ const bookAppointment = async (req, res) => {
       });
     }
 
-    const newBookAppointment = new bookAppointmentModel.bookAppointmentmodel({
-      date: date,
-      time: time,
-    });
+    if (existingTime) {
+      return res.json({
+        success: "false",
+        message: "Time slot already taken",
+      });
+    }
+
 
     await newBookAppointment.save();
 
